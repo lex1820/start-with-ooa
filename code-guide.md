@@ -7,7 +7,7 @@
   - [Data layer](#data-layer)
     - [Database](#database)
     - [Mock data class](#mock-data-class)
-    - [MySQL](#mysql)
+    - [JDBC](#jdbc)
   - [Domain layer](#domain-layer)
   - [Network layer](#network-layer)
   - [Service layer](#service-layer)
@@ -56,7 +56,7 @@
 13. After controller, go further with the service layer
 14. Service layer connects to domain/data layer
 15. To make sure it is easy to change the code when eg. db name changes make sure you use [Configuration files](#configuration-files)
-16. 
+
 
 ## Data layer
 > Contains everything regarding communication to the DB  
@@ -75,7 +75,9 @@
 > Contains all the mock data for testing of the project  
 > Has a mockrepository
 
-### MySQL
+### JDBC
+A way to connect java with databases
+
 > Check this link for up-to-date information [mvnrepository](https://mvnrepository.com/artifact/com.mysql/mysql-connector-j)
 
 >1.  Add dependencies to `**build.gradle**` file  
