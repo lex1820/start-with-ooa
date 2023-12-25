@@ -83,7 +83,7 @@
 `// https://mvnrepository.com/artifact/com.mysql/mysql-connector-j` 
 `implementation 'com.mysql:mysql-connector-j:8.2.0'`
 
->2. Create a Connection instance (**try-with-resources-block**)µ
+>2. Create a Connection instance (**try-with-resources-block**)
 ```java
 private static final String URL = "jdbc:mysql://localhost/shop";
 private static final String USERNAME = "myuser";
@@ -287,17 +287,17 @@ public class MySqlConnection {
 ### Custom exceptions
 > Custom exceptions are needed so you can show the user specifically what's he doing wrong & specify it for your application  
 > Custom exception class ALWAYS has to `extends RuntimeException`  
-> Check examples here: [custom excpetions.java file](../usefull-files/custom%20exceptions.java)
+> Check examples here: [custom excpetions.java file](/usefull-files/custom%20exceptions.java)
 
 ### Config utility class
 > This file loads, reads & writes the the configurations for the application (eg. `.properties files`, ...)
-> Check this [Config.java file](../usefull-files/config.java)
+> Check this [Config.java file](/usefull-files/config.java)
 
 ### Crypto utility class
 > Need to add to build.gradle file, add to the dependencies block:  
 > `implementation 'org.springframework.security:spring-security-crypto:6.1.4'`  
 >
-> Check this [crypto.java file](../usefull-files/crypto.java)
+> Check this [crypto.java file](/usefull-files/crypto.java)
 
 ## Logger
 > Used for logging data/errors/messages, the user can't access these logs but the developpers can
