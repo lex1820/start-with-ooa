@@ -8,7 +8,6 @@
     - [Database](#database)
     - [Mock data class](#mock-data-class)
     - [MySQL](#mysql)
-    - [MySqlConnection](#mysqlconnection)
   - [Domain layer](#domain-layer)
   - [Network layer](#network-layer)
   - [Service layer](#service-layer)
@@ -84,159 +83,15 @@
 `implementation 'com.mysql:mysql-connector-j:8.2.0'`
 
 >2. Create a Connection instance (**try-with-resources-block**)
-```java
-private static final String URL = "jdbc:mysql://localhost/shop";
-private static final String USERNAME = "myuser";
-private static final String PASSWORD = "mypassword";
-private static final Logger LOGGER = Logger.getLogger(ProductsDemo.class.getName());
+>       - To easily make this accessible, create a separate class, [MySQLConnection Class](/usefull-files/MySQLConnection.java)
 
-public static void main(String[] args) {
-    try (Connection con = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
-        // use connection 'con'
-    } catch (SQLException ex) {
-        LOGGER.log(Level.SEVERE, "Unable to connect to database", ex);
-        throw new ShopException("Unable to perform operation.");
-    }
-}
-```
+>3. Execute a query  
+>       - Select statement with(out) parameters [select-query ](/usefull-files/execute-select-statement.java)
+>       - Insert statement [INSERT-query](/usefull-files/execute-insert-statement.java)
 
->3. Execute a query
-```java
-private static final String SQL_SELECT_ALL_PRODUCTS = "select * from product";
-
-//EXECUTE SELECT STATEMENT
-private List<Product> getProducts() {
-    try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-    PreparedStatement prep = connection.prepareStatement(SQL_SELECT_ALL_PRODUCTS);
-    ResultSet rs = prep.executeQuery()) {
-        List<Product> products = new ArrayList<>();
-        while (rs.next()) {
-            products.add(resultSetToProduct(rs));
-        }
-        return products;
-    } catch (SQLException ex) {
-        LOGGER.log(Level.SEVERE, "A database error occured retrieving all products.", ex);
-        throw new ShopException("Unable to retrieve products.");
-    }
-}
-
-private Product resultSetToProduct(ResultSet rs) throws SQLException {
-    return new Product(rs.getInt("id"), rs.getString("name"),
-    rs.getDouble("price"));
-}
-
-//EXECUTE SELECT STATEMENT WITH PARAMETERS
-private static final String SQL_SELECT_PRODUCTS = "select * from product where price > ?";
-
-private List<Product> getProducts() {
-    try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-    PreparedStatement prep = connection.prepareStatement(SQL_SELECT_PRODUCTS)) {
-        prep.setDouble(1, 300);
-        try (ResultSet rs = prep.executeQuery()) {
-            //...
-            return products;
-        }
-    } catch (SQLException ex) {
-        // ...
-    }
-}
-
-//EXECUTE AN INSERT
-private static final String SQL_ADD_PRODUCT = "insert into product(name, price) values (?, ?)";
-
-private void addProduct(){
-    try(Connection connection = DriveManager.getConnection(URL, USERNAME, PASSWORD));
-    PreparedStatement prep = connection.prepareStatement(SQL_ADD_PRODUCT)){
-        prep.setString(1, "tablet");
-        prep.setDouble(2, 499);
-        
-        prep.executeUpdate();    
-    } catch (SQLException ex){
-        LOGGER.log(Level.SEVERE, "A database error occured adding a product.", ex);
-        throw new RunTimeException("Unable to add product.");
-    }
-}
-
-```
-
-
-### MySqlConnection
-> This is not the correct way of storing DB credentials
-```java
-public class MySqlConnection {
-    private static final String URL = "jdbc:mysql://localhost/<DATABASE_NAME>?serverTimezone=UTC";
-    private static final String USERNAME = "<DATABASE_USERNAME>";
-    private static final String PASSWORD = "<DATABASE_PASSWORD>"; // NOSONAR
-    
-    private MySqlConnection() {
-
-    }
-    
-    public static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(URL, USERNAME, PASSWORD); // NOSONAR
-    }
-}
-```
-
-> Store the credentials in the config files
-```java
-public class MySqlConnection {
-    //Use the key to get to the value of the key
-    private static final String KEY_DB_URL = "db.url";
-    private static final String KEY_DB_USERNAME = "db.username";
-    private static final String KEY_DB_PASSWORD = "db.password"; // NOSONAR
-
-    private static final String url;
-    private static final String username;
-    private static final String password;
-    
-    static {
-        url = Config.getInstance().readSetting(KEY_DB_URL);
-        username = Config.getInstance().readSetting(KEY_DB_USERNAME);
-        password = Config.getInstance().readSetting(KEY_DB_PASSWORD);
-    }
-
-    private MySqlConnection() {
-    }
-
-    public static Connection getConnection() throws SQLException {
-    return DriverManager.getConnection(url, username, password);
-    }
-}
-```
-
-> Can't store credentials as clear text, make a way to encrypt & decrypt the credentials -> [Store db credentails in config file](#crypto-utility-class)
-```java
-public class MySqlConnection {
-    //Use the key to get to the value of the key
-    private static final String KEY_DB_URL = "db.url";
-    private static final String KEY_DB_USERNAME = "db.username";
-    private static final String KEY_DB_PASSWORD = "db.password"; // NOSONAR
-
-    private static final String url;
-    private static final String username;
-    private static final String password;
-    
-    static {
-        String usernameEncrypted = Config.getInstance().readSetting(KEY_DB_USERNAME);
-        String passwordEncrypted = Config.getInstance().readSetting(KEY_DB_PASSWORD);
-        
-        Crypto crypto = Crypto.getInstance();
-        
-        username = crypto.decrypt(usernameEncrypted);
-        password = crypto.decrypt(passwordEncrypted);
-        url = Config.getInstance().readSetting(KEY_DB_URL);
-    }
-
-    private MySqlConnection() {
-    }
-
-    public static Connection getConnection() throws SQLException {
-    return DriverManager.getConnection(url, username, password);
-    }
-}
-```
-
+> **IMPORTANT!!**
+>   - Never store the connection url, username & password in the mysqlConnection class => store them in the resources in a **`.properties file`**
+>   -  Store them encrypted in the config files 
 
 ## Domain layer
 > Contains all the classes that are used in the application  
@@ -363,21 +218,4 @@ To use FXML in a Java project => [JavaFX](#javafx)
 > Verify the outcome
 
 ### Example
-```java
-public class CalculatorTest{
-    @Test
-    public void Sum_of_two_numbers(){
-        //Arrange
-        double first = 10;
-        double second = 20;
-        var calculator = new Calculator();
-
-        //Act
-        double result = calculator.sum(first, second);
-
-        //Assert
-        //Expected result, result, delta
-        Assert.assertEquals(30, result, 0.01);
-    }
-}
-```
+> Check this [java file](/usefull-files/unit-test.java) to see an example of a unit test
