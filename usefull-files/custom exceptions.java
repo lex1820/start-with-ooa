@@ -1,4 +1,4 @@
-
+//CUSTOM EXCEPTIONS, files added to util layer of the application
 public class InsufficientFundsException extends RuntimeException {
     public InsufficientFundsException() {
         super();
@@ -11,15 +11,6 @@ public class InsufficientFundsException extends RuntimeException {
     }
 }
 
-public void withdraw(int amount) {
-    if (amount < 0) {
-        throw new IllegalArgumentException("Illegal amount");
-    }
-    if (this.balance < amount) {
-        throw new InsufficientFundsException();
-    }
-    this.balance -= amount;
-}
 
 //Custom exception with specified message & calculation
 public class InsufficientFundsException extends RuntimeException {
@@ -39,14 +30,5 @@ public class InsufficientFundsException extends RuntimeException {
     }
 }
 
-public void withdraw(int amount) {
-    if (amount < 0) {
-        throw new IllegalArgumentException("Illegal amount");
-    }
-    if (this.balance < amount) {
-        throw new InsufficientFundsException(this.balance, amount);
-    }
-    this.balance -= amount;
-}
 ```
 

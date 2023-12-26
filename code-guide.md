@@ -22,11 +22,13 @@
     - [Logger levels](#logger-levels)
   - [FXML](#fxml)
     - [JavaFX](#javafx)
+    - [JavaFX SECOND SCREEN](#javafx-second-screen)
   - [Unit testing](#unit-testing)
     - [Arrange](#arrange)
     - [Act](#act)
     - [Assert](#assert)
     - [Example](#example)
+
 
 ## How to start programming?
 
@@ -200,6 +202,11 @@ To use FXML in a Java project => [JavaFX](#javafx)
     - In the top line (mostly Vbox, Hbox, AnchorPane, ...) add it in between the brackets `<Hbox>`
     > - `fx:controller="be.howest.ti.ui.gui.controllers.<NAME_OF_CONTROLLER_CLASS>"`
 9. Go further in the [Controller class](#controller-class)
+
+### JavaFX SECOND SCREEN
+> If you want to open a new screen, you need to create a new stage & scene
+> Check [this file](/usefull-files/second-screen-javafx.java) 
+
 
 ## Unit testing
 

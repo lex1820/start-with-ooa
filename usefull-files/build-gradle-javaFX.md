@@ -33,6 +33,6 @@
 
     application{
         //Path to class in which you will use to call your FXML
-        mainClass = 'org.example.ui.fxml.Main'
+        mainClass = 'be.howest.ti.ui.gui.Program'
     }
 ```
