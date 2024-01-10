@@ -59,6 +59,8 @@
 14. Service layer connects to domain/data layer
 15. To make sure it is easy to change the code when eg. db name changes make sure you use [Configuration files](#configuration-files)
 
+> When in need to itterate over a list => Try to use .Stream as much as possible
+
 
 ## Data layer
 > Contains everything regarding communication to the DB  
@@ -83,7 +85,7 @@ A way to connect java with databases
 > Check this link for up-to-date information [mvnrepository](https://mvnrepository.com/artifact/com.mysql/mysql-connector-j)
 
 >1.  Add dependencies to `**build.gradle**` file  
-`// https://mvnrepository.com/artifact/com.mysql/mysql-connector-j` 
+`// https://mvnrepository.com/artifact/com.mysql/mysql-connector-j`  
 `implementation 'com.mysql:mysql-connector-j:8.2.0'`
 
 >2. Create a Connection instance (**try-with-resources-block**)
