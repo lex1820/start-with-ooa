@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class CliService {
+
     /**
      * FIELDS
      * */
@@ -37,8 +38,6 @@ public class CliService {
         //Do something with the input
         useUserInput(input);
     }
-
-
 
 
     /**
