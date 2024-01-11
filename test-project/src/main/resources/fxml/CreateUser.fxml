@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="202.0" prefWidth="280.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.howest.ti.ui.gui.controllers.CreateUserController">
+   <children>
+       
+      <Button layoutX="143.0" layoutY="117.0" mnemonicParsing="false" onAction="#btnAddUser" text="Add new user" />
+      <Label fx:id="lblError" layoutX="177.0" layoutY="152.0" />
+      <VBox layoutX="72.0" layoutY="42.0" prefHeight="68.0" prefWidth="231.0">
+         <children>
+            <HBox prefHeight="36.0" prefWidth="342.0">
+               <children>
+                  <Label text="Username: " />
+                  <TextField fx:id="txtFieldUsername" />
+               </children>
+            </HBox>
+             <HBox prefHeight="36.0" prefWidth="342.0">
+                 <children>
+                     <Label text="Password: " />
+                     <TextField fx:id="txtFieldPassword" />
+                 </children>
+             </HBox>
+         </children>
+      </VBox>
+      <Label layoutX="148.0" layoutY="17.0" text="Create user" />
+
+   </children>
+</AnchorPane>

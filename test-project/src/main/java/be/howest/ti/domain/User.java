@@ -10,13 +10,11 @@ public class User implements Serializable {
     /**
      * FIELDS
      * */
-
+    //If you want to write an object to a file, it must be serializable
     @Serial
     private final String username;
-
     @Serial
     private final String password;
-
 
     /**
      * CONSTRUCTOR
@@ -42,7 +40,7 @@ public class User implements Serializable {
      * */
     @Override
     public String toString() {
-        return username + "\t" + password;
+        return "Username: " + username + "\t\t" + "Password: " + password;
     }
     @Override
     public boolean equals(Object o) {

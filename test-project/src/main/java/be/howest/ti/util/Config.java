@@ -9,6 +9,8 @@ import java.util.logging.Logger;
 
 public class Config {
 
+    //This is a class that makes it possible to read & write data to & from a config file in the resources of the project
+
     /**
      * FIELDS
      * */

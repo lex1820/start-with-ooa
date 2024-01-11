@@ -21,7 +21,7 @@ public class FileRepository implements TestRepository{
     /**
      * METHODS
      * */
-    //Write object to file
+    //Write object to file --> object must be serializable (implement Serializable)
     @Override
     public void addUser(User user) {
         try(ObjectOutputStream oos = new ObjectOutputStream(
@@ -39,6 +39,7 @@ public class FileRepository implements TestRepository{
     @Override
     public void addUser(String username, String password) {
         try(PrintStream ps = new PrintStream(
+                //true = append to file, false = overwrite file (default)
                 new FileOutputStream(FILE_PATH_TEXT, true)
         )){
             ps.println(username + "\t" + password);
@@ -99,6 +100,9 @@ public class FileRepository implements TestRepository{
         }
     }
 
+    /**
+     * HELPER METHODS
+     * */
     private User createUser(String[] parts) {
         return new User(parts[0], parts[1]);
     }

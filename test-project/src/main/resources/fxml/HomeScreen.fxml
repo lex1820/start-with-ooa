@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.howest.ti.ui.gui.controllers.HomeScreenController">
+   <children>
+      <!-- All text for label & buttons is stored as (%somename.something) so it can be used by the resource bundle (test-project) -> To make the application bilingual-->
+      <Label layoutX="219.0" layoutY="14.0" text="%project.title" />
+      <ListView fx:id="lstViewUsers" layoutX="14.0" layoutY="81.0" prefHeight="307.0" prefWidth="575.0" />
+      <Button layoutX="20.0" layoutY="47.0" mnemonicParsing="false" onAction="#btnFetchUsers" text="%user.fetch" />
+      <Button layoutX="488.0" layoutY="47.0" mnemonicParsing="false" onAction="#btnCreateUser" text="%user.create" />
+   </children>
+</AnchorPane>

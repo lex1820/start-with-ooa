@@ -24,6 +24,8 @@ public class MySQLRepository implements TestRepository{
      * SQL STATEMENTS
      * */
     private static final String SELECT_ALL_USERS = "SELECT * FROM users";
+
+    //Never use string concatenation to create SQL statements, use prepared statements instead (see below)
     private static final String SELECT_USER_BY_USERNAME = "SELECT * FROM users WHERE username = ?";
     private static final String INSERT_USER = "INSERT INTO users (username, password) VALUES (?, ?)";
 
@@ -33,6 +35,7 @@ public class MySQLRepository implements TestRepository{
      * */
     @Override
     public void addUser(User user) {
+        //TRY WITH RESOURCES --> AUTOMATICALLY CLOSES CONNECTION
         try(Connection con = MySqlConnection.getConnection();
             PreparedStatement prep = con.prepareStatement(INSERT_USER)
         ){
@@ -77,6 +80,7 @@ public class MySQLRepository implements TestRepository{
             List<User> users = new ArrayList<>();
             LOGGER.log(Level.INFO, "Connection established");
             while(rs.next()){
+                //Create users from the result set & add them to the list that will be returned
                 LOGGER.log(Level.INFO, "Info retrieved from DB");
                 users.add(new User(
                         rs.getString("username"),
