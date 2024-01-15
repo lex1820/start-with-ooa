@@ -1,6 +1,7 @@
 package be.howest.ti.data;
 
 import be.howest.ti.domain.User;
+import be.howest.ti.util.Crypto;
 import be.howest.ti.util.TestProjectException;
 
 import java.io.*;
@@ -42,7 +43,8 @@ public class FileRepository implements TestRepository{
                 //true = append to file, false = overwrite file (default)
                 new FileOutputStream(FILE_PATH_TEXT, true)
         )){
-            ps.println(username + "\t" + password);
+            String hashPwd = Crypto.getInstance().hash(password);
+            ps.println(username + "\t" + hashPwd);
             LOGGER.log(Level.INFO, "User added to file");
         } catch (FileNotFoundException ex){
             LOGGER.log(Level.SEVERE, "File was not found", ex);

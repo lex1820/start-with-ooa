@@ -1,5 +1,6 @@
 package be.howest.ti.util;
 
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.encrypt.Encryptors;
 import org.springframework.security.crypto.encrypt.TextEncryptor;
 
@@ -34,6 +35,14 @@ public class Crypto {
 
     public String decrypt(String in) {
         return encryptor.decrypt(in);
+    }
+
+    public String hash(String password) {
+        return BCrypt.hashpw(password, BCrypt.gensalt());
+    }
+
+    public boolean checkHash(String password, String hashedPassword) {
+        return BCrypt.checkpw(password, hashedPassword);
     }
 
 

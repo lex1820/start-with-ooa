@@ -22,16 +22,15 @@ public class Program extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        //Application takes the language of the computer
-        ResourceBundle bundle = ResourceBundle.getBundle("test-project");
+        //Application takes the language of the computer only works when there is a default language file in the resources bundle
+        //ResourceBundle bundle = ResourceBundle.getBundle("test-project");
 
         //Specify which language to use
-        // ResourceBundle bundle = ResourceBundle.getBundle("test-project", new Locale("en", "US"));
+        ResourceBundle bundle = ResourceBundle.getBundle("test-project", new Locale("en", "US"));
 
         //Change path to the correct path of the fxml file
         Parent root = FXMLLoader.load(
                 Objects.requireNonNull(getClass().getResource("/fxml/HomeScreen.fxml")),
-                //Specify the resource bundle to be able to make the application multilingual
                 bundle
         );
         Scene scene = new Scene(root);
